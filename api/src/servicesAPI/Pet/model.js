@@ -19,128 +19,52 @@ const PetSchema = new mongoose.Schema({
     breed: {
         type: String,
         required: true,
-        validate: (v)=>{
-        }
+        // validate: (v)=>{
+        //     //FALTA VALIDAR CON LAS RAZAS CORRESPONDIENTES SEGUN EL TIPO
+        // }
     },
-    amountEmitted:{
+    age:{
         type: Number,
-        required: true,
-        immutable: true,
-        sparse: true,
-        unique: false,
-        enum: AMOUNTS_EMIT
-    },
-    rarity: {
-        type: String,
-        required: true,
-        trim: true,
-        immutable: true,
-        sparse: true,
-        unique: false,
-        enum: NFTS_RARITIES.map(i=>i.rarity)
-    },
-    rarityNumber: {
-        type: Number,
-        required: true,
-        immutable: true,
-        sparse: true,
-        unique: false,
-        enum: NFTS_RARITIES.map(i=>i.rarityNumber)
-    },
-    price: {
-        type: Number,
-        required: true,
-        sparse: true,
-        unique: false,
-        min: 0.0000001,
-    },
-    textureLeft: {
-        type: String,
-        required: true,
-        trim: true,
-        sparse: true,
-        unique: false,
-        match: regexIPFS,
-        immutable: true
-    },
-    textureRight: {
-        type: String,
-        required: true,
-        trim: true,
-        sparse: true,
-        unique: false,
-        match: regexIPFS,
-        immutable: true
-    },
-    imageNFT: {
-        type: String,
-        required: true,
-        trim: true,
-        sparse: true,
-        unique: false,
-        match: regexIPFS,
-        immutable: true
-    },
-    blockchain: {
-        type: String,
-        required: true,
-        trim: true,
-        sparse: true,
-        unique: false,
-        default: 'Polygon',
-        immutable: true,
-        enum: BLOCKCHAINS
-    },
-    // collectionNFT: {
-    //     //POINTER REVISAR
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: false,
-    //     sparse: true,
-    //     unique: false,
-    //     immutable:true,
-    //     ref: 'CollectionNFT'
-    // },
-    royalties: {
-        type: Number,
-        required: true,
+        required: false,
         min: 0,
-        max: 100,
-        sparse: true,
-        unique: false,
+        max: 99
     },
-    createdBy: {
+    profileImage: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    images: {
+        type: [String],
+        required: false,
+    },
+    details: {
+        type: [String],
+        required: false
+    },
+    missing: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    retained: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    ubications: {
+        type: [/*SCHEMA DE UBICACIONES*/]
+    },
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        immutable:true,
-        sparse: true,
-        unique: false,
         ref: 'User'
     },
-    teaser: {
-        type: String,
-        required: false,
-        match: regexIPFS,
-        sparse: true,
-        unique: false,
-    },
     QR: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
-        trim: true,
-        match: regexIPFS,
-        immutable: false,
-        sparse: true,
-        unique: false,
+        ref: 'QR'
     },
-    minted: {
-        type: String,
-        required: false,
-        trim: true,
-        match: regexOpenSea,
-        immutable: false,
-        sparse: true,
-        unique: false,
-    }
 },{
     timestamps: true
 });
